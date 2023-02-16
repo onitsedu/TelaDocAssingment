@@ -11,10 +11,11 @@ public class TimeSlots {
         }
 
         List<int[]> mergedSlots1 = mergeContiguousSlots(slots1).stream()
-                .filter(slot -> isDurationEnough(slot, duration)).toList();
+                .filter(slot -> isDurationEnough(slot, duration))
+                .sorted(Comparator.comparingInt(slot -> slot[0])).toList();
         List<int[]> mergedSlots2 = mergeContiguousSlots(slots2).stream()
                 .filter(slot -> isDurationEnough(slot, duration))
-                .sorted(Comparator.comparingInt(a -> a[0])).toList();
+                .sorted(Comparator.comparingInt(slot -> slot[0])).toList();
 
         //Early exit
         if (mergedSlots1.size() == 0 || mergedSlots2.size() == 0) {
